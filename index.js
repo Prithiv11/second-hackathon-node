@@ -1,15 +1,13 @@
 import express from "express";
 import { MongoClient } from "mongodb";
 const app = express();
-const PORT = 4000;
-// const MONGO_URL = process.env.MONGO_URL;
+const PORT = process.env.PORT;
+const MONGO_URL = process.env.MONGO_URL;
 
 app.use(express.json());
 
 async function createConnection() {
-  const client = new MongoClient(
-    "mongodb+srv://prithiv:welcome123@cluster0.jc18x.mongodb.net"
-  );
+  const client = new MongoClient(MONGO_URL);
   await client.connect();
   console.log("Mongo is connected ✌️😊");
   return client;
@@ -59,4 +57,4 @@ app.post("/money-manager/data", async function (req, res) {
     .insertOne(data);
   res.send(result);
 });
-app.listen(PORT, () => console.log("sever started da goiyaala"));
+app.listen(PORT, () => console.log("sever started"));
