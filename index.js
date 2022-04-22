@@ -3,7 +3,8 @@ import { MongoClient } from "mongodb";
 const app = express();
 const PORT = process.env.PORT;
 const MONGO_URL = process.env.MONGO_URL;
-
+import cors from "cors";
+app.use(cors());
 app.use(express.json());
 
 async function createConnection() {
@@ -22,7 +23,7 @@ app.get("/money-manager", function (req, res) {
   res.send("Hello Everyone 4000😄");
 });
 
-app.get("/money-manager/alldata", async function (req, res) {
+app.get("/money-manager/data", async function (req, res) {
   const data = await client
     .db("money_manager")
     .collection("income")
